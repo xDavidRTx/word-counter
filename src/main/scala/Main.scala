@@ -19,8 +19,8 @@ private object Main extends App with Endpoint.Module[IO] with LazyLogging {
 
   val currentWordCount = get("current") { () =>
     val listOfTopics = currentState.data.groupBy(_._1._1).map { case (eventType, grouped) =>
-      (eventType, grouped.toList.map { case ((_, w), count) => WordCount(w, count) })
-    }.toList
+      (eventType, grouped.map { case ((_, w), count) => WordCount(w, count) })
+    }
 
     Ok(Map("event_types" -> listOfTopics).asJson)
   }

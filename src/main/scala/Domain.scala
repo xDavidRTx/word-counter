@@ -2,7 +2,7 @@ import Domain.{EventType, Word}
 
 import scala.collection.mutable
 
-case class Event(event_type: String, data: String, timestamp: Long)
+case class Event(event_type: EventType, data: Word, timestamp: Long)
 
 case class WordCount(word: String, count: Int)
 
@@ -28,5 +28,6 @@ case class CurrentWordCount(data: mutable.Map[(EventType, Word), Int] = mutable.
 object Domain {
   type EventType = String
   type Word = String
+  //5 Seconds
   lazy val windowSize: Long = 5 * 1000L
 }
