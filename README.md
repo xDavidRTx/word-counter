@@ -1,19 +1,19 @@
 # Windowed word counter
 
-This small application reads the lines output by the blackbox.jar. This blackbox binary will print out JSON lines with attributes “event_type”, “data”, and “timestamp” or some random "trash".
+This small application reads the lines output by the blackbox.jar. This blackbox binary will print out JSON lines with
+attributes “event_type”, “data”, and “timestamp” or some random "trash".
 
-
-To run the application we only need to have the blackbox.jar on the root of the directory and use: 
+To run the application we only need to have the blackbox.jar on the root of the directory and use:
 
 ```
 sbt run
 ```
 
-The application exposes one end-point with the current word count: 
+The application exposes one end-point with the current word count:
 
 http://localhost:8000/current
 
-The output will look somethin like this: 
+The output will look somethin like this:
 
 ```json
 {

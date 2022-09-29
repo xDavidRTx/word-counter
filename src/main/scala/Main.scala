@@ -14,7 +14,7 @@ private object Main extends App with Endpoint.Module[IO] with LazyLogging {
   val proc = Runtime.getRuntime.exec({
     "java -jar blackbox.jar -get t"
   })
-  val stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream))
+  val stdInput     = new BufferedReader(new InputStreamReader(proc.getInputStream))
   val currentState = CurrentWordCount()
 
   val currentWordCount = get("current") { () =>
@@ -23,11 +23,14 @@ private object Main extends App with Endpoint.Module[IO] with LazyLogging {
 
   Http.server.serve(":8000", currentWordCount.toServiceAs[Application.Json])
 
-  Iterator.continually(stdInput).takeWhile(_ != null)
+  Iterator
+    .continually(stdInput)
+    .takeWhile(_ != null)
     .flatMap(line => Utils.getEvent(line.readLine))
     .foldLeft(Window()) {
       //Add do current window
-      case (currentWindow, event) if currentWindow.startTime to currentWindow.startTime + windowSize contains event.timestamp =>
+      case (currentWindow, event)
+          if currentWindow.startTime to currentWindow.startTime + windowSize contains event.timestamp =>
         currentWindow.update(event)
       //Move Window forward and recompute the current data
       case (currentWindow, event) if currentWindow.startTime + windowSize < event.timestamp =>

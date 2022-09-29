@@ -2,8 +2,8 @@ import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 
 class DomainSpec extends AnyFlatSpec with Matchers {
-  val event1: Event = Event("foo", "hello", 0L)
-  val event2: Event = Event("bar", "bye", 4L)
+  val event1: Event       = Event("foo", "hello", 0L)
+  val event2: Event       = Event("bar", "bye", 4L)
   val events: List[Event] = event1 :: event2 :: Nil
 
   "Given a current Window it" must "be updated for a new event" in {
