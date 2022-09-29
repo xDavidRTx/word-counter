@@ -17,82 +17,33 @@ The output will look somethin like this:
 
 ```json
 {
-    "event_types": [
-        [
-            "bar",
-            [
-                {
-                    "word": "ipsum",
-                    "count": 4
-                },
-                {
-                    "word": "lorem",
-                    "count": 7
-                },
-                {
-                    "word": "dolor",
-                    "count": 8
-                },
-                {
-                    "word": "sit",
-                    "count": 11
-                },
-                {
-                    "word": "amet",
-                    "count": 10
-                }
-            ]
-        ],
-        [
-            "baz",
-            [
-                {
-                    "word": "lorem",
-                    "count": 8
-                },
-                {
-                    "word": "ipsum",
-                    "count": 13
-                },
-                {
-                    "word": "amet",
-                    "count": 11
-                },
-                {
-                    "word": "sit",
-                    "count": 12
-                },
-                {
-                    "word": "dolor",
-                    "count": 8
-                }
-            ]
-        ],
-        [
-            "foo",
-            [
-                {
-                    "word": "amet",
-                    "count": 9
-                },
-                {
-                    "word": "sit",
-                    "count": 14
-                },
-                {
-                    "word": "lorem",
-                    "count": 7
-                },
-                {
-                    "word": "ipsum",
-                    "count": 9
-                },
-                {
-                    "word": "dolor",
-                    "count": 10
-                }
-            ]
-        ]
-    ]
+  "event_types": {
+    "bar": {
+      "word_count": {
+        "dolor": 2,
+        "lorem": 5,
+        "amet": 5,
+        "ipsum": 6,
+        "sit": 7
+      }
+    },
+    "foo": {
+      "word_count": {
+        "dolor": 3,
+        "lorem": 5,
+        "amet": 6,
+        "ipsum": 6,
+        "sit": 6
+      }
+    },
+    "baz": {
+      "word_count": {
+        "dolor": 5,
+        "amet": 7,
+        "ipsum": 5,
+        "sit": 1
+      }
+    }
+  }
 }
 ```

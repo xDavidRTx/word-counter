@@ -4,7 +4,14 @@ import scala.collection.mutable
 
 case class Event(event_type: EventType, data: Word, timestamp: Long)
 
-case class WordCount(word: String, count: Int)
+case class WordCount(word_count: mutable.Map[Word, Int] = mutable.Map.empty) {
+  def update(word: Word): Unit = {
+    word_count.updateWith(word) {
+      case Some(count) => Some(count + 1)
+      case None => Some(1)
+    }
+  }
+}
 
 case class Window(startTime: Long = 0, events: List[Event] = Nil) {
   def update(event: Event): Window = this.copy(events = event :: events)
@@ -14,12 +21,17 @@ case class Window(startTime: Long = 0, events: List[Event] = Nil) {
 }
 
 
-case class CurrentWordCount(data: mutable.Map[(EventType, Word), Int] = mutable.Map.empty) extends AnyVal {
+case class CurrentWordCount(data: mutable.Map[EventType, WordCount] = mutable.Map.empty) {
   def update(window: Window): Unit = {
     window.events.foreach { event =>
-      data.updateWith((event.event_type, event.data)) {
-        case None => Some(1)
-        case Some(n) => Some(n + 1)
+      data.updateWith(event.event_type) {
+        case None =>
+          val wc = WordCount()
+          wc.update(event.data)
+          Some(wc)
+        case Some(wc) =>
+          wc.update(event.data)
+          Some(wc)
       }
     }
   }
